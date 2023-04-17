@@ -17,12 +17,13 @@ class AnimeXperience extends StatelessWidget {
         useMaterial3: true,
         scaffoldBackgroundColor: backgroundColor,
         appBarTheme: const AppBarTheme(
+          centerTitle: true,
           backgroundColor: appBarColor,
           titleTextStyle: TextStyle(
-            color: headerTextColor,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 10,
+            color: textColor,
+            fontSize: 22,
+            fontWeight: FontWeight.w500,
+            letterSpacing: 0.5,
           ),
         ),
         fontFamily: GoogleFonts.poppins().fontFamily,

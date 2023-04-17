@@ -8,7 +8,10 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Anime Xperience'),
-        leading: const Icon(Icons.draw_rounded),
+        leading: IconButton(
+          icon: const Icon(Icons.menu, color: Colors.white),
+          onPressed: () {},
+        ),
       ),
     );
   }
