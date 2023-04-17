@@ -1,4 +1,4 @@
-# anime_xperience
+# Anime Xperience
 
 Anime Xperience" is an exciting new anime streaming app that offers a premium viewing experience for fans of anime. With a vast library of anime titles to choose from, users can explore a wide range of genres and discover new shows to love.
 
