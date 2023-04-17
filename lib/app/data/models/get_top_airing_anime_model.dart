@@ -1,11 +1,11 @@
-class GetTopAiringAnime {
+class GetTopAiringAnimeModel {
   int? currentPage;
   bool? hasNextPage;
   List<Results>? results;
 
-  GetTopAiringAnime({this.currentPage, this.hasNextPage, this.results});
+  GetTopAiringAnimeModel({this.currentPage, this.hasNextPage, this.results});
 
-  GetTopAiringAnime.fromJson(Map<String, dynamic> json) {
+  GetTopAiringAnimeModel.fromJson(Map<String, dynamic> json) {
     currentPage = json['currentPage'];
     hasNextPage = json['hasNextPage'];
     if (json['results'] != null) {

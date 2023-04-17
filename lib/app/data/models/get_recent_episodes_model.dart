@@ -1,11 +1,11 @@
-class GetRecentEpisodes {
+class GetRecentEpisodesModel {
   int? currentPage;
   bool? hasNextPage;
   List<Results>? results;
 
-  GetRecentEpisodes({this.currentPage, this.hasNextPage, this.results});
+  GetRecentEpisodesModel({this.currentPage, this.hasNextPage, this.results});
 
-  GetRecentEpisodes.fromJson(Map<String, dynamic> json) {
+  GetRecentEpisodesModel.fromJson(Map<String, dynamic> json) {
     currentPage = json['currentPage'];
     hasNextPage = json['hasNextPage'];
     if (json['results'] != null) {
