@@ -28,43 +28,55 @@ class HomepageScreen extends StatelessWidget {
         () => _screens[homaPageController.currentIndex.value],
       ),
       bottomNavigationBar: Obx(
-        () => GNav(
-          hoverColor: Colors.grey,
-          rippleColor: Colors.grey,
-          curve: Curves.easeIn,
-          duration: const Duration(milliseconds: 500),
-          gap: 8,
-          color: Colors.white70,
-          activeColor: headerTextColor,
-          iconSize: 24,
-          haptic: true,
-          textSize: 20,
-          tabBorderRadius: 12,
-          style: GnavStyle.google,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          selectedIndex: homaPageController.currentIndex.value,
-          onTabChange: (value) {
-            homaPageController.onTabScreenChange(value);
-          },
-          tabs: const [
-            GButton(
-              icon: LineIcons.home,
-              text: 'Home',
+        () => Container(
+          height: 70,
+          decoration: BoxDecoration(
+            color: Colors.blueGrey.shade900,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
             ),
-            GButton(
-              icon: LineIcons.search,
-              text: 'Search',
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GNav(
+              rippleColor: Colors.grey,
+              curve: Curves.easeIn,
+              duration: const Duration(milliseconds: 400),
+              gap: 8,
+              color: Colors.white70,
+              activeColor: headerTextColor,
+              iconSize: 30,
+              haptic: true,
+              textSize: 25,
+              tabBorderRadius: 12,
+              style: GnavStyle.google,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              selectedIndex: homaPageController.currentIndex.value,
+              onTabChange: (value) {
+                homaPageController.onTabScreenChange(value);
+              },
+              tabs: const [
+                GButton(
+                  icon: LineIcons.home,
+                  text: 'Home',
+                ),
+                GButton(
+                  icon: LineIcons.search,
+                  text: 'Search',
+                ),
+                GButton(
+                  icon: LineIcons.heart,
+                  text: 'Likes',
+                ),
+                GButton(
+                  icon: LineIcons.download,
+                  text: 'Downloads',
+                )
+              ],
             ),
-            GButton(
-              icon: LineIcons.heart,
-              text: 'Likes',
-            ),
-            GButton(
-              icon: LineIcons.download,
-              text: 'Downloads',
-            )
-          ],
+          ),
         ),
       ),
     );
