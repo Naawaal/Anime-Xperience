@@ -1,4 +1,5 @@
-import 'package:anime_xperience/app/ui/pages/03_home_screen/home_screen_top.dart';
+import 'package:anime_xperience/app/ui/pages/03_home_screen/home_screen_recent_episodes.dart';
+import 'package:anime_xperience/app/ui/pages/03_home_screen/home_screen_popular_anime.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -16,10 +17,17 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 05),
-        child: Column(
-          children: [
-            HomeScreenTop(),
-          ],
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          clipBehavior: Clip.antiAlias,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              HomeScreenPopularAnime(),
+              HomeScreenRecentEpisodes(),
+            ],
+          ),
         ),
       ),
     );
