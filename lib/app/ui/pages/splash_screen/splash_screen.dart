@@ -40,14 +40,14 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: Text(
                     splashController.counter.value.toString(),
                     style: const TextStyle(
-                      color: headerTextColor,
+                      color: textColor,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               const Text(
                 'Anime Xperience',
                 style: TextStyle(

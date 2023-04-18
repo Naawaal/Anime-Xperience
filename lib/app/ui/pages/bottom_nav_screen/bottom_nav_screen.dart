@@ -1,5 +1,7 @@
 import 'package:anime_xperience/app/controllers/bottom_nav_controller/bottom_nav_controller.dart';
+import 'package:anime_xperience/app/ui/pages/homepage_screen/homepage_screen.dart';
 import 'package:anime_xperience/app/ui/theme/color_const.dart';
+import 'package:anime_xperience/app/ui/utils/snack_bar_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -16,6 +18,7 @@ final bottomNavController = Get.find<BottomNavController>();
 
 class _BottomNavScreenState extends State<BottomNavScreen> {
   final List<Widget> screens = const [
+    HomepageScreen(),
     Center(child: Text('Search')),
     Center(child: Text('Likes')),
     Center(child: Text('Downloads')),
@@ -24,6 +27,47 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Obx(
+          () => Text(
+            bottomNavController.currentIndex.value == 0
+                ? 'Anime Xperience'
+                : bottomNavController.currentIndex.value == 1
+                    ? 'Search'
+                    : bottomNavController.currentIndex.value == 2
+                        ? 'Favorites'
+                        : 'Downloads',
+            style: const TextStyle(
+              color: textColor,
+            ),
+          ),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            showSnackBar('Under Development', 'We are working on it.');
+          },
+          icon: const Icon(
+            LineIcons.bars,
+            color: textColor,
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showSnackBar(
+                  'Under Development', 'This feature takes more time.');
+            },
+            icon: const Icon(
+              LineIcons.chromecast,
+              color: textColor,
+            ),
+          ),
+        ],
+      ),
+      body: Obx(() => IndexedStack(
+            index: bottomNavController.currentIndex.value,
+            children: screens,
+          )),
       bottomNavigationBar: Obx(
         () => Container(
           height: 70,
@@ -64,7 +108,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
                 ),
                 GButton(
                   icon: LineIcons.heart,
-                  text: 'Likes',
+                  text: 'Favorites',
                 ),
                 GButton(
                   icon: LineIcons.download,
