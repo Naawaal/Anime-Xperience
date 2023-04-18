@@ -10,7 +10,7 @@ class HomepageScreen extends StatelessWidget {
   HomepageScreen({super.key});
 
   // HomepageController Instance for the bottom navigation bar
-  final homaPageController = Get.put(HomepageController());
+  final homePageController = Get.put(HomepageController());
 
   // List of screens to be displayed on the bottom navigation bar
   final List<Widget> _screens = const [
@@ -23,9 +23,35 @@ class HomepageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Obx(
+          () => Text(
+            homePageController.currentIndex.value == 0
+                ? 'Anime Xperience'
+                : homePageController.currentIndex.value == 1
+                    ? 'Search'
+                    : homePageController.currentIndex.value == 2
+                        ? 'Likes'
+                        : 'Downloads',
+          ),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.menu, color: Colors.white),
+          onPressed: () {},
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.cast_connected_rounded,
+              color: Colors.white,
+            ),
+            onPressed: () {},
+          ),
+        ],
+      ),
       // Obx is used to update the screen when the currentIndex value changes
       body: Obx(
-        () => _screens[homaPageController.currentIndex.value],
+        () => _screens[homePageController.currentIndex.value],
       ),
       bottomNavigationBar: Obx(
         () => Container(
@@ -52,9 +78,9 @@ class HomepageScreen extends StatelessWidget {
               style: GnavStyle.google,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              selectedIndex: homaPageController.currentIndex.value,
+              selectedIndex: homePageController.currentIndex.value,
               onTabChange: (value) {
-                homaPageController.onTabScreenChange(value);
+                homePageController.onTabScreenChange(value);
               },
               tabs: const [
                 GButton(

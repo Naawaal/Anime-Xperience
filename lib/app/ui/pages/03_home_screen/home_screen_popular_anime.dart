@@ -1,6 +1,7 @@
 import 'package:anime_xperience/app/controllers/03_home_controller/home_controller.dart';
 import 'package:anime_xperience/app/data/models/get_top_airing_anime_model.dart';
 import 'package:anime_xperience/app/data/services/api/get_top_airing_anime_api.dart';
+import 'package:anime_xperience/app/routes/name_routes.dart';
 import 'package:anime_xperience/app/ui/theme/color_const.dart';
 import 'package:anime_xperience/app/ui/theme/text_const.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -16,7 +17,6 @@ class HomeScreenPopularAnime extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -32,7 +32,11 @@ class HomeScreenPopularAnime extends StatelessWidget {
             ),
             // See all button
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(
+                  NameRoutes.homeScreenSeeAll,
+                );
+              },
               child: Text(
                 TextConst.seeAll,
                 style: const TextStyle(
@@ -46,7 +50,7 @@ class HomeScreenPopularAnime extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         SizedBox(
-          height: Get.height * 0.38,
+          height: Get.height * 0.35,
           child: FutureBuilder<GetTopAiringAnimeModel>(
             future: getTopAiringAnime(),
             builder: (context, snapshot) {
@@ -155,6 +159,7 @@ class HomeScreenPopularAnime extends StatelessWidget {
                             ),
                           ],
                         ),
+
                         //Showing anime title
                         Container(
                           width: Get.width * 0.5,

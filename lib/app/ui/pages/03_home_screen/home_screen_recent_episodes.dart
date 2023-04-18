@@ -99,6 +99,8 @@ class HomeScreenRecentEpisodes extends StatelessWidget {
                   ),
                   scrollDirection: Axis.vertical,
                   itemCount: 4,
+                  shrinkWrap: true,
+                  clipBehavior: Clip.antiAlias,
                   itemBuilder: (context, index) {
                     return Column(
                       children: [

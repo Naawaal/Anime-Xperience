@@ -23,7 +23,6 @@ Future<GetRecentEpisodesModel> getRecentEpisodes() async {
       // convert the json response to a model
       final getRecentEpisodesModel = GetRecentEpisodesModel.fromJson(decode);
 
-      print(getRecentEpisodesModel.results![0].title);
       // return the model
       return getRecentEpisodesModel;
     } else {

@@ -8,13 +8,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Anime Xperience'),
-        leading: IconButton(
-          icon: const Icon(Icons.menu, color: Colors.white),
-          onPressed: () {},
-        ),
-      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 05),
         child: SingleChildScrollView(
