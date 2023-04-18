@@ -4,14 +4,18 @@ import 'package:anime_xperience/app/data/models/get_top_airing_anime_model.dart'
 import 'package:anime_xperience/app/ui/utils/snack_bar_utils.dart';
 import 'package:http/http.dart' as http;
 
-Future<GetTopAiringAnimeModel> getTopAiringAnime() async {
+Future<GetTopAiringAnimeModel> getTopAiringAnime({int page = 1}) async {
   try {
     // declare the api url
     const api = "https://api.consumet.org/anime/gogoanime/top-airing";
     final url = Uri.parse(api);
 
     // make the get request to the api
-    final response = await http.get(url);
+    final response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      "page": page.toString(),
+    });
 
     if (response.statusCode == 200) {
       // if the response is 200, then the request is successful

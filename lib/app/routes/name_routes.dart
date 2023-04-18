@@ -1,5 +1,4 @@
 class NameRoutes {
-  static String homepage = '/';
-  static String home = '/home';
-  static String homeScreenSeeAll = '/seeAll';
+  static String spalshScreen = '/';
+  static String bottomNavScreen = '/bottomNav';
 }

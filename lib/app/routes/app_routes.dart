@@ -1,29 +1,23 @@
-import 'package:anime_xperience/app/bindings/02_homepage_bindings/homepage_bindings.dart';
-import 'package:anime_xperience/app/bindings/03_home_bindings/home_bindings.dart';
+import 'package:anime_xperience/app/bindings/bottom_nav_bindings/bottom_nav_binding.dart';
+import 'package:anime_xperience/app/bindings/splash_bindings/splash_bindings.dart';
 import 'package:anime_xperience/app/routes/name_routes.dart';
-import 'package:anime_xperience/app/ui/pages/02_homepage_screen/homepage_screen.dart';
-import 'package:anime_xperience/app/ui/pages/03_home_screen/home_screen.dart';
-import 'package:anime_xperience/app/ui/pages/03_home_screen/home_screen_see_all.dart';
+import 'package:anime_xperience/app/ui/pages/bottom_nav_screen/bottom_nav_screen.dart';
+import 'package:anime_xperience/app/ui/pages/splash_screen/splash_screen.dart';
 import 'package:get/get.dart';
 
 class AppRoutes {
   static appRoutes() => [
         GetPage(
-          name: NameRoutes.homepage,
-          page: () => HomepageScreen(),
-          binding: HomepageBindings(),
-          title: 'Homepage',
+          name: NameRoutes.spalshScreen,
+          page: () => const SplashScreen(),
+          title: 'Splash Screen',
+          binding: SplashBindings(),
         ),
         GetPage(
-          name: NameRoutes.home,
-          page: () => const HomeScreen(),
-          title: 'Home',
-          binding: HomeBindings(),
-        ),
-        GetPage(
-          name: NameRoutes.homeScreenSeeAll,
-          page: () => const HomeScreenSeeAllScreen(),
-          title: 'See All',
+          name: NameRoutes.bottomNavScreen,
+          page: () => const BottomNavScreen(),
+          title: 'Bottom Navigation Screen',
+          binding: BottomNavBinding(),
         ),
       ];
 }

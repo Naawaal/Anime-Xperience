@@ -1,20 +1,21 @@
-import 'package:anime_xperience/app/controllers/02_homepage_controller/homepage_controller.dart';
-import 'package:anime_xperience/app/ui/pages/03_home_screen/home_screen.dart';
+import 'package:anime_xperience/app/controllers/bottom_nav_controller/bottom_nav_controller.dart';
 import 'package:anime_xperience/app/ui/theme/color_const.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
-class HomepageScreen extends StatelessWidget {
-  HomepageScreen({super.key});
+class BottomNavScreen extends StatefulWidget {
+  const BottomNavScreen({super.key});
 
-  // HomepageController Instance for the bottom navigation bar
-  final homePageController = Get.put(HomepageController());
+  @override
+  State<BottomNavScreen> createState() => _BottomNavScreenState();
+}
 
-  // List of screens to be displayed on the bottom navigation bar
-  final List<Widget> _screens = const [
-    HomeScreen(),
+final bottomNavController = Get.find<BottomNavController>();
+
+class _BottomNavScreenState extends State<BottomNavScreen> {
+  final List<Widget> screens = const [
     Center(child: Text('Search')),
     Center(child: Text('Likes')),
     Center(child: Text('Downloads')),
@@ -23,36 +24,6 @@ class HomepageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Obx(
-          () => Text(
-            homePageController.currentIndex.value == 0
-                ? 'Anime Xperience'
-                : homePageController.currentIndex.value == 1
-                    ? 'Search'
-                    : homePageController.currentIndex.value == 2
-                        ? 'Likes'
-                        : 'Downloads',
-          ),
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.menu, color: Colors.white),
-          onPressed: () {},
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.cast_connected_rounded,
-              color: Colors.white,
-            ),
-            onPressed: () {},
-          ),
-        ],
-      ),
-      // Obx is used to update the screen when the currentIndex value changes
-      body: Obx(
-        () => _screens[homePageController.currentIndex.value],
-      ),
       bottomNavigationBar: Obx(
         () => Container(
           height: 70,
@@ -78,9 +49,9 @@ class HomepageScreen extends StatelessWidget {
               style: GnavStyle.google,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              selectedIndex: homePageController.currentIndex.value,
+              selectedIndex: bottomNavController.currentIndex.value,
               onTabChange: (value) {
-                homePageController.onTabScreenChange(value);
+                bottomNavController.onTabScreenChange(value);
               },
               tabs: const [
                 GButton(
