@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 
 class HomepageController extends GetxController {
   @override
-  void onInit() async {
-    await getTopAiringAnime();
+  void onInit() {
+    getTopAiringAnime();
     super.onInit();
   }
 }

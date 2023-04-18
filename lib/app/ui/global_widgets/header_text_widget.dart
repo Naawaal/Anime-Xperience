@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 class HeaderTextWidget extends StatelessWidget {
   final String headerText;
   final String buttonText;
+  final void Function() onPressed;
   const HeaderTextWidget(
-      {super.key, required this.headerText, required this.buttonText});
+      {super.key,
+      required this.headerText,
+      required this.buttonText,
+      required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +25,7 @@ class HeaderTextWidget extends StatelessWidget {
           ),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: onPressed,
           child: Text(
             buttonText,
             style: const TextStyle(

@@ -4,6 +4,7 @@ import 'package:anime_xperience/app/bindings/splash_bindings/splash_bindings.dar
 import 'package:anime_xperience/app/routes/name_routes.dart';
 import 'package:anime_xperience/app/ui/pages/bottom_nav_screen/bottom_nav_screen.dart';
 import 'package:anime_xperience/app/ui/pages/homepage_screen/homepage_screen.dart';
+import 'package:anime_xperience/app/ui/pages/homepage_screen/homepage_screen_see_all.dart';
 import 'package:anime_xperience/app/ui/pages/splash_screen/splash_screen.dart';
 import 'package:get/get.dart';
 
@@ -25,6 +26,12 @@ class AppRoutes {
           name: NameRoutes.homepageScreen,
           page: () => const HomepageScreen(),
           title: 'Homepage Screen',
+          binding: HomepageBinding(),
+        ),
+        GetPage(
+          name: NameRoutes.seeallScreen,
+          page: () => const HomepageScreenSeeAll(),
+          title: 'Popular Anime Screen',
           binding: HomepageBinding(),
         ),
       ];
