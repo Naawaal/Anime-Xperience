@@ -1,4 +1,5 @@
 import 'package:anime_xperience/app/bindings/bottom_nav_bindings/bottom_nav_binding.dart';
+import 'package:anime_xperience/app/bindings/homepage_bindings/homepage_bindings.dart';
 import 'package:anime_xperience/app/bindings/splash_bindings/splash_bindings.dart';
 import 'package:anime_xperience/app/routes/name_routes.dart';
 import 'package:anime_xperience/app/ui/pages/bottom_nav_screen/bottom_nav_screen.dart';
@@ -24,6 +25,7 @@ class AppRoutes {
           name: NameRoutes.homepageScreen,
           page: () => const HomepageScreen(),
           title: 'Homepage Screen',
+          binding: HomepageBinding(),
         ),
       ];
 }

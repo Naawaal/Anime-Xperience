@@ -1,5 +1,5 @@
 import 'package:anime_xperience/app/ui/global_widgets/header_text_widget.dart';
-import 'package:anime_xperience/app/ui/global_widgets/listview_widget.dart';
+import 'package:anime_xperience/app/ui/pages/homepage_screen/homepage_screen_popular_anime.dart';
 import 'package:flutter/material.dart';
 
 class HomepageScreen extends StatefulWidget {
@@ -19,7 +19,7 @@ class _HomepageScreenState extends State<HomepageScreen> {
           children: const [
             HeaderTextWidget(
                 headerText: 'Popular Anime', buttonText: 'see all'),
-            ListviewWidget(),
+            HomepageScreenPopularAnime()
           ],
         ),
       ),
