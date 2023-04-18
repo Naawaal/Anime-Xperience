@@ -1,3 +1,4 @@
+import 'package:anime_xperience/app/controllers/03_home_controller/home_controller.dart';
 import 'package:anime_xperience/app/data/models/get_top_airing_anime_model.dart';
 import 'package:anime_xperience/app/data/services/api/get_top_airing_anime_api.dart';
 import 'package:anime_xperience/app/ui/theme/color_const.dart';
@@ -6,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeScreenTop extends StatelessWidget {
-  const HomeScreenTop({super.key});
+  HomeScreenTop({super.key});
+
+  final HomeController homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +45,7 @@ class HomeScreenTop extends StatelessWidget {
           height: Get.height * 0.3,
           child: FutureBuilder<GetTopAiringAnimeModel>(
             future: getTopAiringAnime(),
-            builder: (context, AsyncSnapshot<GetTopAiringAnimeModel> snapshot) {
+            builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(
                   child: Column(
@@ -84,13 +87,13 @@ class HomeScreenTop extends StatelessWidget {
                 );
               } else {
                 return ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: 8,
                   scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: snapshot.data!.results!.length,
                   itemBuilder: (context, index) {
                     return Container(
                       width: Get.width * 0.5,
-                      // height: Get.height,
+                      height: Get.height * 0.3,
                       margin: const EdgeInsets.only(right: 10),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),

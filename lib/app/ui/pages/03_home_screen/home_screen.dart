@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 05),
         child: Column(
-          children: const [
+          children: [
             HomeScreenTop(),
           ],
         ),
