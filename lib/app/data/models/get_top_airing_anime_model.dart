@@ -1,5 +1,5 @@
 class GetTopAiringAnimeModel {
-  int? currentPage;
+  String? currentPage;
   bool? hasNextPage;
   List<Results>? results;
 

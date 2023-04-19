@@ -40,6 +40,7 @@ dependencies:
   google_nav_bar: ^5.0.6
   line_icons: ^2.0.1
   cached_network_image: ^3.2.3
+  pull_to_refresh: ^2.0.0
 
 dev_dependencies:
   flutter_test:

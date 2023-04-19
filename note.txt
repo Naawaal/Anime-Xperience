@@ -1,0 +1,23 @@
+  // void scrollListener() {
+  //   if (scrollController.value.hasClients) {
+  //     if (scrollController.value.position.pixels ==
+  //         scrollController.value.position.maxScrollExtent) {
+  //       currentPage.value++;
+  //       fetchTopAiringAnime(page: currentPage.value);
+  //     }
+  //   } else {}
+  // }
+
+  // Future<void> fetchTopAiringAnime({int page = 1}) async {
+  //   try {
+  //     isLoading.value = true;
+  //     final response = await getTopAiringAnime(page: page);
+  //     if (response.results!.length < 500) hasNextPage.value = false;
+  //     if (page == 1) {
+  //       animeList.clear();
+  //     }
+  //     animeList.addAll(response.results!);
+  //   } finally {
+  //     isLoading.value = false;
+  //   }
+  // }
