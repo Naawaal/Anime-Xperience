@@ -8,8 +8,9 @@ class GridviewWidget extends StatelessWidget {
   final String Function(int index) animeTitile;
   final String Function(int index) animeGenre1;
   final String Function(int index) animeImage;
-  final ScrollController scrollController;
-  final bool isLoading;
+  final ScrollController? scrollController;
+  final Axis? scrollDirection;
+
   // Add this callback
 
   const GridviewWidget({
@@ -18,32 +19,28 @@ class GridviewWidget extends StatelessWidget {
     required this.animeTitile,
     required this.animeGenre1,
     required this.animeImage,
-    required this.scrollController,
-    required this.isLoading,
+    this.scrollController,
+    this.scrollDirection,
   });
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      addAutomaticKeepAlives: true,
-      controller: scrollController,
-      padding: const EdgeInsets.all(6),
-      physics: const BouncingScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 2,
-        mainAxisSpacing: 5,
-        childAspectRatio: 0.65,
-      ),
-      itemCount: itemCount,
-      shrinkWrap: true,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      itemBuilder: (context, index) {
-        if (isLoading && index == itemCount - 1) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
+        addAutomaticKeepAlives: true,
+        scrollDirection: scrollDirection ?? Axis.vertical,
+        controller: scrollController,
+        padding: const EdgeInsets.all(6),
+        physics: const BouncingScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 2,
+          mainAxisSpacing: 5,
+          childAspectRatio: 0.60,
+        ),
+        itemCount: itemCount,
+        shrinkWrap: true,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        itemBuilder: (context, index) {
           return Column(
             children: [
               Stack(
@@ -111,8 +108,6 @@ class GridviewWidget extends StatelessWidget {
               ),
             ],
           );
-        }
-      },
-    );
+        });
   }
 }

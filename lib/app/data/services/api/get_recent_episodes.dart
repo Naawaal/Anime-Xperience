@@ -4,10 +4,10 @@ import 'package:anime_xperience/app/data/models/get_recent_episodes_model.dart';
 import 'package:anime_xperience/app/ui/utils/snack_bar_utils.dart';
 import 'package:http/http.dart' as http;
 
-Future<GetRecentEpisodesModel> getRecentEpisodes() async {
+Future<GetRecentEpisodesModel> getRecentEpisodes({int page = 1}) async {
   try {
-    // declare the api url
-    const api = "https://api.consumet.org/anime/gogoanime/recent-episodes";
+    final api =
+        "https://api.consumet.org/anime/gogoanime/recent-episodes?page=$page";
     final url = Uri.parse(api);
 
     // make the get request to the api

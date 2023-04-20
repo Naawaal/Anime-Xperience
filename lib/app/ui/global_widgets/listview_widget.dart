@@ -24,7 +24,7 @@ class ListviewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: Get.width * 5,
-      height: Get.height * 0.40,
+      height: Get.height * 0.36,
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
         clipBehavior: Clip.antiAlias,

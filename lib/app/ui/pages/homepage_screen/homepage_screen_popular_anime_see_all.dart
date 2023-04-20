@@ -4,16 +4,18 @@ import 'package:anime_xperience/app/ui/theme/color_const.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomepageScreenSeeAll extends StatefulWidget {
-  const HomepageScreenSeeAll({Key? key}) : super(key: key);
+class HomepagePopularAnimeSeeAll extends StatefulWidget {
+  const HomepagePopularAnimeSeeAll({super.key});
 
   @override
-  State<HomepageScreenSeeAll> createState() => _HomepageScreenSeeAllState();
+  State<HomepagePopularAnimeSeeAll> createState() =>
+      _HomepagePopularAnimeSeeAllState();
 }
 
-class _HomepageScreenSeeAllState extends State<HomepageScreenSeeAll> {
-  final HomepageController homepageController = Get.find();
+final homepageController = Get.find<HomepageController>();
 
+class _HomepagePopularAnimeSeeAllState
+    extends State<HomepagePopularAnimeSeeAll> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +42,6 @@ class _HomepageScreenSeeAllState extends State<HomepageScreenSeeAll> {
                 child: CircularProgressIndicator(),
               )
             : GridviewWidget(
-                isLoading: homepageController.isLoading.value,
                 itemCount: homepageController.animeList.length,
                 animeTitile: (index) =>
                     homepageController.animeList[index].title!,

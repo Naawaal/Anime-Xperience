@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class HeaderTextWidget extends StatelessWidget {
   final String headerText;
   final String buttonText;
-  final void Function() onPressed;
+  final Function() onPressed;
   const HeaderTextWidget(
       {super.key,
       required this.headerText,

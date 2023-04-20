@@ -31,7 +31,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
         title: Obx(
           () => Text(
             bottomNavController.currentIndex.value == 0
-                ? 'Anime Xperience'
+                ? 'Home'
                 : bottomNavController.currentIndex.value == 1
                     ? 'Search'
                     : bottomNavController.currentIndex.value == 2
