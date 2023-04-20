@@ -16,7 +16,8 @@ class HomepageController extends GetxController {
   @override
   void onInit() {
     fetchTopAiringAnime();
-    scrollController.value.addListener(scrollListener); // Add this line
+    scrollController.value.addListener(scrollListener);
+
     super.onInit();
   }
 
