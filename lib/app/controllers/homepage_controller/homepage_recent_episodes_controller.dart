@@ -7,6 +7,8 @@ class HomepageRecentEpisodesController extends GetxController {
   PagingController<int, GetRecentEpisodesModel>
       recentEpisodesPaginationController = PagingController(firstPageKey: 1);
 
+  final RxString animeVideoLink = ''.obs;
+
   @override
   void onInit() {
     super.onInit();

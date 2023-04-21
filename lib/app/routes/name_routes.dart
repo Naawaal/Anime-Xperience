@@ -5,4 +5,5 @@ class NameRoutes {
   static String homepagePopularAnimeSeeAll = '/popularanime';
   static String homepageRecentEpisodesSeeAll = '/recentepisodes';
   static String searchScreen = '/search';
+  static String animeDetailScreen = '/animeDetail';
 }

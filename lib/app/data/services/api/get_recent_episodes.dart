@@ -7,9 +7,13 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 Future<GetRecentEpisodesModel> getRecentEpisodes(
-    {int page = 1, int maxPage = 60}) async {
+    {int page = 1, int maxPage = 20}) async {
   final homeController = Get.put(HomepageRecentEpisodesController());
-  if (page > maxPage) return GetRecentEpisodesModel();
+
+  if (page > maxPage) {
+    return GetRecentEpisodesModel();
+  }
+
   try {
     final api =
         "https://api.consumet.org/anime/gogoanime/recent-episodes?page=$page";
@@ -26,10 +30,6 @@ Future<GetRecentEpisodesModel> getRecentEpisodes(
 
       homeController.recentEpisodesPaginationController
           .appendPage([getRecentEpisodesModel], page + 1);
-
-      print("current page ${getRecentEpisodesModel.currentPage}");
-      print("paging page $page");
-
       return getRecentEpisodesModel;
     } else {
       showSnackBar('Error', 'Something went wrong');
