@@ -30,6 +30,7 @@ Future<GetRecentEpisodesModel> getRecentEpisodes(
 
       homeController.recentEpisodesPaginationController
           .appendPage([getRecentEpisodesModel], page + 1);
+
       return getRecentEpisodesModel;
     } else {
       showSnackBar('Error', 'Something went wrong');

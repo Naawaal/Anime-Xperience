@@ -89,7 +89,7 @@ class PagedGridviewWidget<T> extends StatelessWidget {
                           animeGenre1(item, index),
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 14,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

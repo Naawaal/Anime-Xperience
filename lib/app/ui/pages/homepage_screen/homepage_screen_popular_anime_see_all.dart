@@ -1,5 +1,5 @@
-import 'package:anime_xperience/app/controllers/homepage_controller/homepage_controller.dart';
-import 'package:anime_xperience/app/ui/global_widgets/gridview_widget.dart';
+import 'package:anime_xperience/app/controllers/homepage_controller/homepage__popular_anime_controller.dart';
+import 'package:anime_xperience/app/ui/global_widgets/paged_gridview_widget.dart';
 import 'package:anime_xperience/app/ui/theme/color_const.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,7 +12,7 @@ class HomepagePopularAnimeSeeAll extends StatefulWidget {
       _HomepagePopularAnimeSeeAllState();
 }
 
-final homepageController = Get.find<HomepageController>();
+final homepageController = Get.find<HomepagePopularAnimeController>();
 
 class _HomepagePopularAnimeSeeAllState
     extends State<HomepagePopularAnimeSeeAll> {
@@ -36,22 +36,12 @@ class _HomepagePopularAnimeSeeAllState
           },
         ),
       ),
-      body: Obx(
-        () => homepageController.isLoading.value
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : GridviewWidget(
-                itemCount: homepageController.animeList.length,
-                animeTitile: (index) =>
-                    homepageController.animeList[index].title!,
-                animeGenre1: (index) =>
-                    homepageController.animeList[index].genres![0],
-                animeImage: (index) =>
-                    homepageController.animeList[index].image!,
-                scrollController: homepageController.scrollController.value,
-              ),
-      ),
+      body: PagedGridviewWidget(
+          pagingController: homepageController.popularAnimePaginationController,
+          animeTitle: (items, index) => items.results![0].title!,
+          animeImage: (items, index) => items.results![0].image!,
+          animeGenre1: (items, index) => items.results![0].genres![0],
+          onTap: (items, index) {}),
     );
   }
 }

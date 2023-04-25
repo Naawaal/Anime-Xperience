@@ -13,7 +13,10 @@ class WebviewPalyerController extends GetxController {
   }
 
   void removeAds() async {
+    // advance ads blocking method for webview flutter plugin
     await controller.runJavascriptReturningResult(
-        'document.querySelectorAll(".ads").forEach((el) => el.remove());');
+        "var script = document.createElement('script');script.type = 'text/javascript';script.src = 'https://raw.githubusercontent.com/abp-filters/abp-filters-anti-cv/master/filter.txt';document.getElementsByTagName('head')[0].appendChild(script);");
   }
+
+  void enableDownloading() async {}
 }
