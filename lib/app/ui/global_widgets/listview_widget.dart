@@ -9,6 +9,7 @@ class ListviewWidget extends StatelessWidget {
   final String Function(int index) animeGenre1;
   final String Function(int index) animeGenre2;
   final String Function(int index) animeImage;
+  final Function(int index)? onTap;
 
   const ListviewWidget({
     super.key,
@@ -18,6 +19,7 @@ class ListviewWidget extends StatelessWidget {
     required this.animeGenre1,
     required this.animeGenre2,
     required this.animeTitile,
+    this.onTap,
   });
 
   @override
@@ -35,19 +37,22 @@ class ListviewWidget extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  Container(
-                    width: Get.width * 0.45,
-                    height: Get.height * 0.30,
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      color: Colors.blueGrey,
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                        image: CachedNetworkImageProvider(animeImage(index)),
-                        fit: BoxFit.cover,
+                  InkWell(
+                    onTap: onTap != null ? () => onTap!(index) : null,
+                    child: Container(
+                      width: Get.width * 0.45,
+                      height: Get.height * 0.30,
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: Colors.blueGrey,
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                          image: CachedNetworkImageProvider(animeImage(index)),
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                  ).marginOnly(left: 5, right: 5),
+                    ).marginOnly(left: 5, right: 5),
+                  ),
                   Positioned(
                     top: 0,
                     right: 5,
