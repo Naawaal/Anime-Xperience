@@ -22,9 +22,9 @@ final box = GetStorage();
 class _WebViewPlayerScreenState extends State<WebViewPlayerScreen> {
   @override
   void initState() {
+    videoController.animeVideoLink.value = box.read('videoLink');
     super.initState();
-    fetchDirectVideoUrl(widget.animeVideoLink);
-    // open video in webview player screen in landscape mode only and hide status bar and navigation bar in android devices and when back button is pressed it will go back to portrait mode
+    fetchDirectVideoUrl(episodeLink: widget.animeVideoLink);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
@@ -33,25 +33,25 @@ class _WebViewPlayerScreenState extends State<WebViewPlayerScreen> {
 
   @override
   void dispose() {
+    super.dispose();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
     ]);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: SystemUiOverlay.values);
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: WebView(
+        zoomEnabled: false,
         backgroundColor: backgroundColor,
-        initialUrl: '${box.read('videoLink')}',
+        initialUrl: videoController.animeVideoLink.value,
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController) {
           videoController.controller = webViewController;
-          videoController.removeAds();
+          videoController.controller!.clearCache();
+          final CookieManager cookieManager = CookieManager();
+          cookieManager.clearCookies();
         },
         allowsInlineMediaPlayback: true,
         onPageFinished: (_) => videoController.removeAds(),

@@ -3,7 +3,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as parser;
 
-Future<void> fetchDirectVideoUrl(String episodeLink) async {
+Future<String?> fetchDirectVideoUrl({String episodeLink = ''}) async {
   try {
     final box = GetStorage();
 
@@ -18,7 +18,10 @@ Future<void> fetchDirectVideoUrl(String episodeLink) async {
     final videoLink = replaceVideoLink;
 
     box.write('videoLink', videoLink);
+
+    return videoLink;
   } catch (e) {
     showSnackBar('Error', e.toString());
   }
+  return '';
 }

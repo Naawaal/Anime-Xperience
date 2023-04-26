@@ -45,9 +45,7 @@ class _HomepagePopularAnimeSeeAllState
         onTap: (items, index) {
           Get.to(
             () => AnimeDetailsScreen(
-              animeImage: items.results![0].image,
-              animeName: items.results![0].title,
-              animeID: items.results![0].id,
+              animeId: items.results![0].id,
             ),
           );
         },

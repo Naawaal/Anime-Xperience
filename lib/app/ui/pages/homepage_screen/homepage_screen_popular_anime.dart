@@ -1,6 +1,5 @@
 import 'package:anime_xperience/app/controllers/homepage_controller/homepage_controller.dart';
 import 'package:anime_xperience/app/data/models/get_top_airing_anime_model.dart';
-import 'package:anime_xperience/app/data/services/api/get_anime_details.dart';
 import 'package:anime_xperience/app/data/services/api/get_top_airing_anime_api.dart';
 import 'package:anime_xperience/app/ui/global_widgets/listview_widget.dart';
 import 'package:anime_xperience/app/ui/pages/anime_detail_screen/anime_detail_screen.dart';
@@ -37,12 +36,9 @@ class _HomepageScreenPopularAnimeState
             onTap: (index) async {
               Get.to(
                 () => AnimeDetailsScreen(
-                  animeImage: snapshot.data!.results![index].image!,
-                  animeName: snapshot.data!.results![index].title!,
-                  animeID: snapshot.data!.results![index].id!,
+                  animeId: snapshot.data!.results![index].id,
                 ),
               );
-              await getAnimeDetails(snapshot.data!.results![index].id!);
             },
           );
         } else if (snapshot.hasError) {

@@ -13,16 +13,10 @@ class SplashController extends GetxController {
   }
 
   void startCounter() {
-    counter.value = 5;
-    Timer.periodic(
-      1.seconds,
-      (timer) {
-        if (counter.value == 0) {
-          timer.cancel();
-          Get.offAllNamed(NameRoutes.bottomNavScreen);
-        } else {
-          counter.value--;
-        }
+    Timer(
+      3.seconds,
+      () {
+        Get.offAllNamed(NameRoutes.bottomNavScreen);
       },
     );
   }

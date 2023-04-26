@@ -1,18 +1,16 @@
+import 'package:anime_xperience/app/data/models/get_anime_details_model.dart';
+import 'package:anime_xperience/app/data/services/api/get_anime_details.dart';
+import 'package:anime_xperience/app/ui/pages/video_player_screen/video_player_screen.dart';
 import 'package:anime_xperience/app/ui/theme/color_const.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AnimeDetailsScreen extends StatefulWidget {
-  final String? animeImage;
-  final String? animeName;
-  final String? animeID;
-
+  final String? animeId;
   const AnimeDetailsScreen({
     super.key,
-    this.animeImage,
-    this.animeName,
-    this.animeID,
+    this.animeId,
   });
 
   @override
@@ -35,72 +33,256 @@ class _AnimeDetailsScreenState extends State<AnimeDetailsScreen> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Stack(
-              clipBehavior: Clip.none,
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  height: Get.height * 0.25,
-                  width: Get.width,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: CachedNetworkImageProvider(widget.animeImage!),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Container(
-                  height: Get.height * 0.25,
-                  width: Get.width,
-                  color: blackColor.withOpacity(0.7),
-                ),
-                Positioned(
-                  top: Get.height * 0.12,
-                  child: Container(
-                    height: Get.height * 0.25,
-                    width: Get.width * 40 / 100,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: CachedNetworkImageProvider(widget.animeImage!),
-                        fit: BoxFit.cover,
+      body: FutureBuilder<GetAnimeDetailsModel>(
+        future: getAnimeDetails(widget.animeId!),
+        builder: (context, AsyncSnapshot<GetAnimeDetailsModel> snapshot) {
+          if (snapshot.hasData) {
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  Stack(
+                    clipBehavior: Clip.none,
+                    alignment: Alignment.center,
+                    children: [
+                      Container(
+                        height: Get.height * 0.25,
+                        width: Get.width,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: CachedNetworkImageProvider(
+                                snapshot.data!.image!),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
-                      borderRadius: BorderRadius.circular(10.0),
+                      Container(
+                        height: Get.height * 0.25,
+                        width: Get.width,
+                        color: blackColor.withOpacity(0.7),
+                      ),
+                      Positioned(
+                        top: Get.height * 0.12,
+                        child: Container(
+                          height: Get.height * 0.25,
+                          width: Get.width * 40 / 100,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: CachedNetworkImageProvider(
+                                  snapshot.data!.image!),
+                              fit: BoxFit.cover,
+                            ),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  FittedBox(
+                    child: Text(
+                      snapshot.data!.title!,
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                        color: textColor,
+                      ),
+                    ).marginOnly(top: 110.0),
+                  ),
+                  const SizedBox(
+                    height: 05,
+                  ),
+                  FittedBox(
+                    alignment: Alignment.centerLeft,
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      snapshot.data!.otherName!,
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                        color: textColor,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            FittedBox(
-              child: Text(
-                widget.animeName!,
-                style: const TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                  color: textColor,
-                ),
-              ).marginOnly(top: 110.0),
-            ),
-            const SizedBox(
-              height: 05,
-            ),
-            FittedBox(
-              child: Text(
-                "ID: ${widget.animeID}",
-                style: const TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                  color: textColor,
-                ),
+                  const Divider().marginOnly(left: 5, right: 5),
+                  Wrap(
+                    alignment: WrapAlignment.spaceEvenly,
+                    spacing: 5,
+                    runSpacing: 5,
+                    clipBehavior: Clip.antiAlias,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      const Text(
+                        'Genres: ',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: textColor,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Chip(label: Text(snapshot.data!.genres![0])),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 05,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.deepPurple,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
+                      shape: BoxShape.rectangle,
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                'Release : ${snapshot.data!.releaseDate}',
+                                style: const TextStyle(
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: textColor,
+                                ),
+                              ),
+                            ),
+                            FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                'Status: ${snapshot.data!.status}',
+                                style: const TextStyle(
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: textColor,
+                                ),
+                              ),
+                            ),
+                            FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                'Total Episodes: ${snapshot.data!.totalEpisodes}',
+                                style: const TextStyle(
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: textColor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                'Type : ${snapshot.data!.type}',
+                                style: const TextStyle(
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: textColor,
+                                ),
+                              ),
+                            ),
+                            FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                'Dub/Sub: ${snapshot.data!.subOrDub}',
+                                style: const TextStyle(
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: textColor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Divider(
+                          color: Colors.deepPurple,
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          snapshot.data!.description!,
+                          textAlign: TextAlign.justify,
+                          style: const TextStyle(
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.bold,
+                            color: textColor,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                      ],
+                    ),
+                  ).paddingAll(5),
+                  const SizedBox(
+                    height: 05,
+                  ),
+                  GridView.builder(
+                    padding: const EdgeInsets.all(5.0),
+                    addAutomaticKeepAlives: true,
+                    clipBehavior: Clip.antiAlias,
+                    shrinkWrap: true,
+                    itemCount: snapshot.data!.episodes!.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 7,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                    ),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () async {
+                          Get.to(
+                            () => VideoPlayer(
+                              episodesID: snapshot.data!.episodes![index].id!,
+                            ),
+                          );
+                        },
+                        child: Container(
+                          height: 20,
+                          width: 20,
+                          alignment: Alignment.center,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.deepPurple,
+                            ),
+                            borderRadius: BorderRadius.circular(10.0),
+                            shape: BoxShape.rectangle,
+                          ),
+                          child: Text(
+                            snapshot.data!.episodes![index].number!.toString(),
+                            style: const TextStyle(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.bold,
+                              color: textColor,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
-            ),
-            const Divider().marginOnly(left: 5, right: 5),
-            Row()
-          ],
-        ),
+            );
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
       ),
     );
   }
