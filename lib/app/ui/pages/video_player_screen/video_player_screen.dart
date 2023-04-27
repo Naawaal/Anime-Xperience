@@ -1,7 +1,5 @@
 import 'package:anime_xperience/app/controllers/video_player_controller/video_player_controller.dart';
-import 'package:anime_xperience/app/data/models/get_anime_episodes_url_model.dart';
-import 'package:anime_xperience/app/data/services/api/get_episodes_link.dart';
-import 'package:chewie/chewie.dart';
+import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,39 +15,41 @@ final videoPlayerController = Get.put(VideoPlayerControllers());
 
 class _VideoPlayerState extends State<VideoPlayer> {
   @override
+  void initState() {
+    super.initState();
+    const BetterPlayerCacheConfiguration(
+      useCache: false,
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    videoPlayerController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<GetAnimeEpisodesUrlModel>(
-        future: getAnimeEpisodesLink(widget.episodesID),
-        builder: (context, snapshot) {
-          return Column(
-            children: [
-              Expanded(
-                child: Center(
-                  child: videoPlayerController.chewieController != null &&
-                          videoPlayerController.chewieController!
-                              .videoPlayerController.value.isInitialized
-                      ? Chewie(
-                          controller: videoPlayerController.chewieController!,
-                        )
-                      : Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            CircularProgressIndicator(),
-                            SizedBox(height: 20),
-                            Text(
-                              'Loading',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
+      body: GetBuilder<VideoPlayerControllers>(
+        init: VideoPlayerControllers(),
+        builder: (controller) {
+          return Center(
+            child: AspectRatio(
+              aspectRatio: 16 / 9,
+              child: BetterPlayer.network(
+                videoPlayerController.box.read('episodes')!,
+                betterPlayerConfiguration: const BetterPlayerConfiguration(
+                  aspectRatio: 16 / 9,
+                  autoPlay: true,
+                  looping: true,
+                  fit: BoxFit.cover,
+                  autoDispose: true,
+                  fullScreenAspectRatio: 16 / 9,
+                  expandToFill: true,
                 ),
               ),
-            ],
+            ),
           );
         },
       ),

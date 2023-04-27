@@ -21,7 +21,6 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     HomepageScreen(),
     Center(child: Text('Search')),
     Center(child: Text('Likes')),
-    Center(child: Text('Downloads')),
   ];
 
   @override
@@ -34,9 +33,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
                 ? 'Home'
                 : bottomNavController.currentIndex.value == 1
                     ? 'Search'
-                    : bottomNavController.currentIndex.value == 2
-                        ? 'Favorites'
-                        : 'Downloads',
+                    : 'Favorites',
             style: const TextStyle(
               color: textColor,
             ),
@@ -110,10 +107,6 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
                   icon: LineIcons.heart,
                   text: 'Favorites',
                 ),
-                GButton(
-                  icon: LineIcons.download,
-                  text: 'Downloads',
-                )
               ],
             ),
           ),

@@ -5,6 +5,9 @@ import 'package:anime_xperience/app/ui/theme/color_const.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+
+import '../../../data/services/api/get_episodes_link.dart';
 
 class AnimeDetailsScreen extends StatefulWidget {
   final String? animeId;
@@ -16,6 +19,8 @@ class AnimeDetailsScreen extends StatefulWidget {
   @override
   State<AnimeDetailsScreen> createState() => _AnimeDetailsScreenState();
 }
+
+final box = GetStorage();
 
 class _AnimeDetailsScreenState extends State<AnimeDetailsScreen> {
   @override
@@ -227,6 +232,22 @@ class _AnimeDetailsScreenState extends State<AnimeDetailsScreen> {
                       ],
                     ),
                   ).paddingAll(5),
+                  const Text(
+                    "Episodes",
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      color: textColor,
+                    ),
+                  ).marginOnly(top: 3.0, bottom: 3.0),
+                  const Text(
+                    "Note:If the desired episode doesn't play, you can try clicking on it again to watch it or exit and start playing it once more.",
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.bold,
+                      color: textColor,
+                    ),
+                  ).marginOnly(top: 3.0, bottom: 3.0),
                   const SizedBox(
                     height: 05,
                   ),
@@ -243,26 +264,29 @@ class _AnimeDetailsScreenState extends State<AnimeDetailsScreen> {
                       crossAxisSpacing: 10,
                     ),
                     itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () async {
-                          Get.to(
-                            () => VideoPlayer(
-                              episodesID: snapshot.data!.episodes![index].id!,
-                            ),
-                          );
-                        },
-                        child: Container(
-                          height: 20,
-                          width: 20,
-                          alignment: Alignment.center,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.deepPurple,
-                            ),
-                            borderRadius: BorderRadius.circular(10.0),
-                            shape: BoxShape.rectangle,
+                      return Container(
+                        height: 20,
+                        width: 20,
+                        alignment: Alignment.center,
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.deepPurple,
                           ),
+                          borderRadius: BorderRadius.circular(10.0),
+                          shape: BoxShape.rectangle,
+                        ),
+                        child: InkWell(
+                          onTap: () async {
+                            Get.to(
+                              () => VideoPlayer(
+                                episodesID: snapshot.data!.episodes![index].id!,
+                              ),
+                            );
+                            await box.write("episodesID",
+                                snapshot.data!.episodes![index].id!);
+                            await getAnimeEpisodesLink();
+                          },
                           child: Text(
                             snapshot.data!.episodes![index].number!.toString(),
                             style: const TextStyle(

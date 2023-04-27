@@ -44,9 +44,7 @@ dependencies:
   html: ^0.15.2
   get_storage: ^2.1.1
   webview_flutter: ^3.0.0
-  video_player: ^2.6.1
-  chewie: ^1.4.0
-
+  better_player: ^0.0.83
 dev_dependencies:
   flutter_test:
     sdk: flutter
