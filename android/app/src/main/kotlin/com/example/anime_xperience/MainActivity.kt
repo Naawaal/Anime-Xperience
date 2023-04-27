@@ -1,4 +1,4 @@
-package com.example.anime_xperience
+package com.nawal.anime_xperience
 
 import io.flutter.embedding.android.FlutterActivity
 

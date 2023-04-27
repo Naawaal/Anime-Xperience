@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.anime_xperience">
+    package="com.nawal.anime_xperience">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="anime_xperience"
+        android:label="Anime Xperience"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
