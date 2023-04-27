@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-# Anime Xperience
-=======
-<p align="center"><a href="https://github.com/Naawaal/Anime-Xperience"><img src="/meta/android/animexstream.png" width="150"></a></p> 
->>>>>>> d55f0cbdb5938f54902193a7171c8898dc002bd4
+<p align="center"><a href="https://github.com/Naawaal/Anime-Xperience"><img src="/meta/android/animexstream.png" width="150"></a></p>
 
 Anime Xperience is an exciting new anime streaming app that offers a premium viewing experience for fans of anime. With a vast library of anime titles to choose from, users can explore a wide range of genres and discover new shows to love.
 
@@ -12,6 +8,6 @@ We appreciate your patience and support as we continue to improve and refine the
 <<<<<<< HEAD
 =======
 
+# Screenshot
 
-# Screenshot 
->>>>>>> d55f0cbdb5938f54902193a7171c8898dc002bd4
+> > > > > > > d55f0cbdb5938f54902193a7171c8898dc002bd4
