@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class GridviewWidget extends StatelessWidget {
-  final int itemCount;
+  final int Function(int index) itemCount;
   final String Function(int index) animeTitile;
   final String Function(int index) animeGenre1;
   final String Function(int index) animeImage;
@@ -39,7 +39,7 @@ class GridviewWidget extends StatelessWidget {
         mainAxisSpacing: 5,
         childAspectRatio: 0.60,
       ),
-      itemCount: itemCount,
+      itemCount: itemCount(0),
       shrinkWrap: true,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       itemBuilder: (context, index) {

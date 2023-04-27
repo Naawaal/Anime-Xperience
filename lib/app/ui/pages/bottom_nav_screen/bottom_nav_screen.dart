@@ -1,5 +1,6 @@
 import 'package:anime_xperience/app/controllers/bottom_nav_controller/bottom_nav_controller.dart';
 import 'package:anime_xperience/app/ui/pages/homepage_screen/homepage_screen.dart';
+import 'package:anime_xperience/app/ui/pages/search_screen/search_screen.dart';
 import 'package:anime_xperience/app/ui/theme/color_const.dart';
 import 'package:anime_xperience/app/ui/utils/snack_bar_utils.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ final bottomNavController = Get.find<BottomNavController>();
 class _BottomNavScreenState extends State<BottomNavScreen> {
   final List<Widget> screens = const [
     HomepageScreen(),
-    Center(child: Text('Search')),
+    SearchScreen(),
     Center(child: Text('Likes')),
   ];
 

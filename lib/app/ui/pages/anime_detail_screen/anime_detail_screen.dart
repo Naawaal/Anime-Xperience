@@ -3,6 +3,7 @@ import 'package:anime_xperience/app/data/services/api/get_anime_details.dart';
 import 'package:anime_xperience/app/ui/pages/video_player_screen/video_player_screen.dart';
 import 'package:anime_xperience/app/ui/theme/color_const.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -27,6 +28,12 @@ class _AnimeDetailsScreenState extends State<AnimeDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text(
+          'Back',
+          style: TextStyle(
+            color: textColor,
+          ),
+        ),
         backgroundColor: appBarColor,
         leading: IconButton(
           onPressed: () {
@@ -43,6 +50,7 @@ class _AnimeDetailsScreenState extends State<AnimeDetailsScreen> {
         builder: (context, AsyncSnapshot<GetAnimeDetailsModel> snapshot) {
           if (snapshot.hasData) {
             return SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
                   Stack(
@@ -160,17 +168,6 @@ class _AnimeDetailsScreenState extends State<AnimeDetailsScreen> {
                             FittedBox(
                               fit: BoxFit.scaleDown,
                               child: Text(
-                                'Status: ${snapshot.data!.status}',
-                                style: const TextStyle(
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: textColor,
-                                ),
-                              ),
-                            ),
-                            FittedBox(
-                              fit: BoxFit.scaleDown,
-                              child: Text(
                                 'Total Episodes: ${snapshot.data!.totalEpisodes}',
                                 style: const TextStyle(
                                   fontSize: 15.0,
@@ -182,7 +179,7 @@ class _AnimeDetailsScreenState extends State<AnimeDetailsScreen> {
                           ],
                         ),
                         const SizedBox(
-                          height: 5,
+                          height: 10,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -210,6 +207,20 @@ class _AnimeDetailsScreenState extends State<AnimeDetailsScreen> {
                               ),
                             ),
                           ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            'Status: ${snapshot.data!.status}',
+                            style: const TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                              color: textColor,
+                            ),
+                          ),
                         ),
                         const Divider(
                           color: Colors.deepPurple,
@@ -241,22 +252,23 @@ class _AnimeDetailsScreenState extends State<AnimeDetailsScreen> {
                     ),
                   ).marginOnly(top: 3.0, bottom: 3.0),
                   const Text(
-                    "Note:If the desired episode doesn't play, you can try clicking on it again to watch it or exit and start playing it once more.",
+                    textAlign: TextAlign.center,
+                    "Note: If the desired episode doesn't play, you can try clicking on it again to watch it or exit and start playing it once more.",
                     style: TextStyle(
                       fontSize: 14.0,
                       fontWeight: FontWeight.bold,
                       color: textColor,
                     ),
-                  ).marginOnly(top: 3.0, bottom: 3.0),
+                  ).marginAll(5),
                   const SizedBox(
                     height: 05,
                   ),
                   GridView.builder(
                     padding: const EdgeInsets.all(5.0),
-                    addAutomaticKeepAlives: true,
                     clipBehavior: Clip.antiAlias,
                     shrinkWrap: true,
                     itemCount: snapshot.data!.episodes!.length,
+                    dragStartBehavior: DragStartBehavior.start,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 7,

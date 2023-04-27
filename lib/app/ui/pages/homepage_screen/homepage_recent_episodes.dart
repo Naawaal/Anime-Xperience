@@ -22,7 +22,7 @@ class _HomepageScreenRecentEpisodesState
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return GridviewWidget(
-            itemCount: 4,
+            itemCount: (index) => 4,
             scrollDirection: Axis.vertical,
             animeImage: (index) => snapshot.data!.results![index].image!,
             animeGenre1: (index) =>
