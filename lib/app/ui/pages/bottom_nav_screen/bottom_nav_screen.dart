@@ -21,7 +21,6 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   final List<Widget> screens = const [
     HomepageScreen(),
     SearchScreen(),
-    Center(child: Text('Likes')),
   ];
 
   @override
@@ -30,11 +29,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       appBar: AppBar(
         title: Obx(
           () => Text(
-            bottomNavController.currentIndex.value == 0
-                ? 'Home'
-                : bottomNavController.currentIndex.value == 1
-                    ? 'Search'
-                    : 'Favorites',
+            bottomNavController.currentIndex.value == 0 ? 'Home' : 'Search',
             style: const TextStyle(
               color: textColor,
             ),
@@ -103,10 +98,6 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
                 GButton(
                   icon: LineIcons.search,
                   text: 'Search',
-                ),
-                GButton(
-                  icon: LineIcons.heart,
-                  text: 'Favorites',
                 ),
               ],
             ),
